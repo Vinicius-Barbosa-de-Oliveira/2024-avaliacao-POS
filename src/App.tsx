@@ -275,7 +275,7 @@ const Itempubl = (props: {titulo: string; body: string}) => {
 type Usuario = {
   id: number,
   nome: string;
-  nomeUsuario: string;
+  usuario: string;
   email: string;
 };
 
@@ -284,16 +284,12 @@ const ListaDeUsuarios = () => {
   const [usuarios, setuser] = useState([]);
   const escutaruser = () => {
     axios.get("https://jsonplaceholder.typicode.com/users/").then((resposta: AxiosResponse) => {
-      const dados = resposta.data.map((item: { id: number;  name: string;  username: string;  email: string;  adress: string;  phone: string;  website: string;  company: string; }) => {
+      const dados = resposta.data.map((item: { id: number; name: string; username: string; email: string; }) => {
         return {
           id: item.id,
-          Name: item.name,
-          Username: item.username,
-          Email: item.email,
-          Adress: item.adress,
-          Phone: item.phone,
-          Website: item.website,
-          Company: item.company,
+          nome: item.name,
+          usuario: item.username,
+          email: item.email
         };
       });
       setuser(dados);
@@ -309,14 +305,14 @@ const ListaDeUsuarios = () => {
       <ul>
         {
           usuarios.map((item: Usuario) => {
-            return <ItemUsuario key={item.id} nome={item.nome}  nomeUsuario={item.nomeUsuario} email={item.email}/>
+            return <ItemUsuario key={item.id} nome={item.nome}  usuario={item.usuario} email={item.email}/>
           })
         }
       </ul>
     </div>);
 }
-const ItemUsuario = (props: {nome: string; nomeUsuario: string; email: string}) => {
-  return (<li>{props.nome} - {props.nomeUsuario} - {props.email}</li>);
+const ItemUsuario = (props: {nome: string; usuario: string; email: string}) => {
+  return (<li>{props.nome} - {props.usuario} - {props.email}</li>);
 }
 
 
